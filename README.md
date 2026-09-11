@@ -1,6 +1,6 @@
 # Tenute Santangelo — Demo
 
-Home italiana e inglese, scene Three.js originali e admin interattivo.
+Home italiana e inglese, sequenza fotografica controllata dallo scroll, scena olio Three.js e admin interattivo.
 
 ## Percorsi
 - `/it/`: homepage italiana
@@ -29,10 +29,17 @@ Workflow: `.github/workflows/pages-demo.yml`. Nel repository di destinazione imp
 
 Prezzi, disponibilità e ordini sono dati dimostrativi, non approvati per la vendita. L’admin modifica solo lo stato locale della sessione: ricaricando la pagina torna ai dati iniziali, e non modifica la vetrina. Non esistono login, database, pagamenti o chiamate UPS attive. Carrello e checkout sono esclusivamente dimostrativi. La demo ha noindex/nofollow.
 
-Scene 3D procedurali: le geometrie di arancia, bicchiere e bottiglia illustrano lo storyboard; la bottiglia EVO è una visualizzazione concettuale e non una riproduzione certificata del packaging. Rispetto di prefers-reduced-motion e fallback fotografico in assenza di WebGL.
+L’arancia usa i frame del video fornito dal cliente. La bottiglia EVO rimane una scena Three.js concettuale, non una riproduzione certificata del packaging, con fallback fotografico in assenza di WebGL.
 
 ## Backend successivo
 Supabase: prodotti, categorie, varianti, immagini e ruoli. Prezzi e giacenze ricalcolati sul server. Stripe/PayPal hosted checkout, webhook idempotenti. UPS Rating API con OAuth client_credentials, account nazionali/estero e tariffe negoziate. Credenziali esclusivamente nelle variabili ambiente, mai nel repository.
 
 ## Materiali
 Foto e logo forniti dal cliente, conservati con i codici originali in `public/images`. Le relative autorizzazioni d’uso restano del titolare.
+
+## Sequenza arancia
+Il video sorgente `gemini_generated_video_7f6c08cf.mp4` (1280×720, 24 fps, 10 secondi) è ricampionato a 18 fps: 180 frame. Ritaglio centrale 640×720; variante mobile 360×405. `scripts/prepare-orange-sequence.sh /percorso/video.mp4` rigenera gli asset con FFmpeg. Il video originale non è incluso nel sito.
+
+Ogni WebP contiene 8 frame su una griglia 4×2: 23 tavole per risoluzione; l’ultima ha quattro frame validi. Il player `components/orange-sequence.tsx` sceglie la risoluzione all’apertura della pagina, segue lo scroll in entrambe le direzioni e carica solo le tavole vicine. Massimo tre tavole decodificate e due richieste contemporanee; le immagini vengono liberate quando escono dalla cache. Dopo una visita completa: circa 2,8 MB desktop o 1,1 MB mobile, oltre al poster. Le dimensioni compresse non equivalgono alla memoria decodificata.
+
+Poster HTML immediato anche senza JavaScript; nessuna sequenza con `prefers-reduced-motion` o risparmio dati segnalato dal browser. Se una richiesta fallisce, resta il poster o l’ultimo frame valido. Nessun audio o autoplay video. Gli asset rispettano `NEXT_PUBLIC_BASE_PATH` per GitHub Pages.

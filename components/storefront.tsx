@@ -2,6 +2,7 @@
 import {useEffect,useState} from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import OrangeSequence from './orange-sequence';
 import {ArrowUpRight,ArrowDown,ArrowRight,ShoppingBag,Plus,Minus,X,Menu,Leaf,Sun,Package,UserRound} from 'lucide-react';
 import {Dialog,DialogContent,DialogTitle,DialogDescription} from '@/components/ui/dialog';
 import {Sheet,SheetContent,SheetTitle,SheetDescription} from '@/components/ui/sheet';
@@ -38,7 +39,7 @@ export default function Storefront({lang}:{lang:'it'|'en'}){
      <div className="hero-orbit" aria-hidden="true"/>
      <div className="hero-copy citrus-intro"><p className="eyebrow"><span className="tiny-sun">✳</span> {t('COLTIVIAMO UN PEZZO DI SICILIA','A LITTLE PIECE OF SICILY')}</p><h1>{t('Il sole,','Sunshine,')}<br/><em>{t('a casa tua.','at your door.')}</em></h1><p className="hero-description">{t('Ci sono sapori che ti portano lontano. E altri che ti fanno sentire a casa. I nostri fanno entrambe le cose.','Some flavours take you places. Others make you feel at home. Ours do both.')}</p><a className="pill-button dark" href="#products">{t('Assapora la Sicilia','Taste Sicily')}<ArrowUpRight size={19}/></a></div>
      <div className="hero-copy citrus-outro"><p className="eyebrow">{t('APRI. RESPIRA. ASSAPORA.','OPEN. BREATHE. TASTE.')}</p><h2>{t('Dentro,','Inside,')}<br/><em>{t('tutta Sicilia.','all of Sicily.')}</em></h2><p className="hero-description">{t('Il profumo della buccia. Il colore del sole. La meraviglia delle cose semplici, spicchio dopo spicchio.','The scent of the peel. The colour of sunshine. The wonder of simple things, segment after segment.')}</p><button className="pill-button dark" onClick={()=>goCategory('Agrumi')}>{t('Scopri gli agrumi','Discover our citrus')}<ArrowUpRight size={19}/></button></div>
-     <div className="hero-visual"><div className="sun-disc" aria-hidden="true"/><ProductScene kind="orange" sectionId="citrus" lang={lang}/><span className="fruit-caption">CITRUS SINENSIS<br/><b>{t('L’essenza del Mediterraneo','The essence of the Mediterranean')}</b></span></div>
+     <div className="hero-visual hero-visual--sequence"><OrangeSequence sectionId="citrus" lang={lang}/><span className="fruit-caption">CITRUS SINENSIS<br/><b>{t('L’essenza del Mediterraneo','The essence of the Mediterranean')}</b></span></div>
      <div className="hero-scroll"><span>{t('LA NATURA HA IL SUO RITMO. SEGUI IL TUO.','NATURE HAS ITS OWN RHYTHM. FIND YOURS.')}</span><span className="scroll-round"><ArrowDown size={18}/></span><small>{t('Scorri e scopri','Scroll to discover')}</small></div>
      <div className="chapter-label"><span>01 / 03</span><span>{t('IL SOLE','SUNSHINE')}</span></div><div className="chapter-progress"/>
     </div>
